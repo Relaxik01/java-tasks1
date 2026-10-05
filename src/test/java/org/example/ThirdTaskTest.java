@@ -9,7 +9,6 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ThirdTaskTest {
 
-    // Вспомогательный метод: перехватывает вывод generateSubsets и возвращает его строкой
     private String captureOutput(int[] values) {
         PrintStream originalOut = System.out;
 
@@ -26,7 +25,6 @@ class ThirdTaskTest {
         return buffer.toString();
     }
 
-    // Считает непустые строки в выводе
     private long countLines(String output) {
         long count = 0;
         for (String line : output.split("\\R")) {
@@ -39,35 +37,30 @@ class ThirdTaskTest {
 
     @Test
     void threeElementsProduceEightSubsets() {
-        // Проверка из задания: для {1, 2, 3} должно быть 8 подмножеств
         String output = captureOutput(new int[]{1, 2, 3});
         assertEquals(8, countLines(output));
     }
 
     @Test
     void emptySetIsPrinted() {
-        // Пустое множество должно присутствовать
         String output = captureOutput(new int[]{1, 2, 3});
         assertTrue(output.contains("{ }"));
     }
 
     @Test
     void fullSetIsPrinted() {
-        // Исходное множество тоже должно присутствовать
         String output = captureOutput(new int[]{1, 2, 3});
         assertTrue(output.contains("{ 1 2 3 }"));
     }
 
     @Test
     void singleElementProducesTwoSubsets() {
-        // Базовый случай для массива из одного элемента: {} и {1}
         String output = captureOutput(new int[]{1});
         assertEquals(2, countLines(output));
     }
 
     @Test
     void twoElementsProduceFourSubsets() {
-        // Ещё один рекурсивный случай: для {1, 2} → 4 подмножества
         String output = captureOutput(new int[]{1, 2});
         assertEquals(4, countLines(output));
     }
